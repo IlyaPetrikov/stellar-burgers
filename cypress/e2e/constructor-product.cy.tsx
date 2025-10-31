@@ -1,4 +1,4 @@
-import { SELECTORS, TEST_URL } from "cypress/support/constants"; 
+import { SELECTORS, TEST_URL } from '../support/constants';
 
 describe('Constructor Product', () => {
   beforeEach(() => {
@@ -81,4 +81,66 @@ describe('Order placement', () => {
     cy.get('@constructorArea').contains('Ингредиент 2').should('not.exist');
     cy.get('@constructorArea').contains('Ингредиент 4').should('not.exist');
   });
+
+ describe('Ingredient Modal', () => {
+  beforeEach(() => {
+    cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
+    cy.visit(TEST_URL);
+  });
+
+  it('displays correct ingredient details in modal when clicked', () => {
+    const ingredient = {
+      name: 'Ингредиент 3',
+      calories: 643,
+      proteins: 44,
+      fat: 26,
+      carbohydrates: 85
+    };
+
+    cy.get(SELECTORS.INGREDIENT_MAIN).contains(ingredient.name).click();
+
+    // Проверка заголовка
+    cy.contains('h3', ingredient.name).should('be.visible');
+
+    // Проверка калорий
+    cy.contains('Калории, ккал')
+      .parent('li')
+      .find('p')
+      .eq(1)
+      .should('have.text', ingredient.calories.toString());
+
+    // Проверка белков
+    cy.contains('Белки, г')
+      .parent('li')
+      .find('p')
+      .eq(1)
+      .should('have.text', ingredient.proteins.toString());
+
+    // Проверка жиров
+    cy.contains('Жиры, г')
+      .parent('li')
+      .find('p')
+      .eq(1)
+      .should('have.text', ingredient.fat.toString());
+
+    // Проверка углеводов
+    cy.contains('Углеводы, г')
+      .parent('li')
+      .find('p')
+      .eq(1)
+      .should('have.text', ingredient.carbohydrates.toString());
+
+    // Закрытие
+    cy.get(SELECTORS.MODAL_CLOSE_BUTTON).click();
+    cy.contains('h3', ingredient.name).should('not.exist');
+  });
+
+  it('closes modal when clicking on overlay', () => {
+    const ingredientName = 'Ингредиент 5';
+    cy.get(SELECTORS.INGREDIENT_SAUCE).contains(ingredientName).click();
+    cy.contains('h3', ingredientName).should('be.visible');
+    cy.get('#modals > div').eq(1).click({ force: true });
+    cy.contains('h3', ingredientName).should('not.exist');
+  });
+});
 });
