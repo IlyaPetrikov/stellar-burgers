@@ -99,38 +99,32 @@ describe('Order placement', () => {
 
     cy.get(SELECTORS.INGREDIENT_MAIN).contains(ingredient.name).click();
 
-    // Проверка заголовка
     cy.contains('h3', ingredient.name).should('be.visible');
 
-    // Проверка калорий
     cy.contains('Калории, ккал')
       .parent('li')
       .find('p')
       .eq(1)
       .should('have.text', ingredient.calories.toString());
 
-    // Проверка белков
     cy.contains('Белки, г')
       .parent('li')
       .find('p')
       .eq(1)
       .should('have.text', ingredient.proteins.toString());
 
-    // Проверка жиров
     cy.contains('Жиры, г')
       .parent('li')
       .find('p')
       .eq(1)
       .should('have.text', ingredient.fat.toString());
 
-    // Проверка углеводов
     cy.contains('Углеводы, г')
       .parent('li')
       .find('p')
       .eq(1)
       .should('have.text', ingredient.carbohydrates.toString());
 
-    // Закрытие
     cy.get(SELECTORS.MODAL_CLOSE_BUTTON).click();
     cy.contains('h3', ingredient.name).should('not.exist');
   });
