@@ -1,8 +1,10 @@
 import { setCookie, getCookie } from '@utils/cookie';
 import { TIngredient, TOrder, TUser } from 'types';
 
-const URL = 'https://norma.nomoreparties.space/api';
-
+const URL =
+  process.env.REACT_APP_BURGER_API_URL ||
+  'https://norma.education-services.ru/api';
+console.log('API URL:', process.env.REACT_APP_BURGER_API_URL);
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
