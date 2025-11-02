@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1761925562804" clover="3.2.0">
-  <project timestamp="1761925562805" name="All files">
+<coverage generated="1762070544442" clover="3.2.0">
+  <project timestamp="1762070544442" name="All files">
     <metrics statements="854" coveredstatements="525" conditionals="39" coveredconditionals="30" methods="30" coveredmethods="11" elements="923" coveredelements="566" complexity="0" loc="854" ncloc="854" packages="12" files="17" classes="17"/>
     <package name="services.slices.constructor-product">
       <metrics statements="60" coveredstatements="60" conditionals="8" coveredconditionals="8" methods="5" coveredmethods="5"/>

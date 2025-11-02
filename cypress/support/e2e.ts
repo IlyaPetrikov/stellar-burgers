@@ -12,6 +12,13 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+Cypress.on('window:before:load', (win) => {
 
+  win.process = {
+    env: {
+      ...Cypress.env(), 
+    },
+  };
+});
 // Import commands.js using ES2015 syntax:
 import './commands'

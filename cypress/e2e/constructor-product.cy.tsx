@@ -2,7 +2,7 @@ import { SELECTORS, TEST_URL } from '../support/constants';
 
 describe('Constructor Product', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
+    cy.intercept('GET', '/api/ingredients', { fixture: 'ingredients.json' });
     cy.visit(TEST_URL);
   });
 
@@ -40,9 +40,9 @@ describe('Constructor Product', () => {
 
 describe('Order placement', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
-    cy.intercept('GET', 'api/auth/user', { fixture: 'user.json' });
-    cy.intercept('POST', 'api/orders', { fixture: 'order.json' });
+    cy.intercept('GET', '/api/ingredients', { fixture: 'ingredients.json' });
+    cy.intercept('GET', '/api/auth/user', { fixture: 'user.json' });
+    cy.intercept('POST', '/api/orders', { fixture: 'order.json' });
 
     window.localStorage.setItem(
       'refreshToken',
@@ -84,7 +84,7 @@ describe('Order placement', () => {
 
  describe('Ingredient Modal', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
+    cy.intercept('GET', '/api/ingredients', { fixture: 'ingredients.json' });
     cy.visit(TEST_URL);
   });
 
